@@ -29,6 +29,7 @@ public class KakaoService {
 	private KakaoDao kakaoDao;
 	
 	public String getAccessToken(String authorize_code) {
+				    
 		String access_Token = "";
 		String refresh_Token = "";
 		String reqURL = "https://kauth.kakao.com/oauth/token";
@@ -37,18 +38,18 @@ public class KakaoService {
 			URL url = new URL(reqURL);
             
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-			// POST ¿äÃ»À» À§ÇØ ±âº»°ªÀÌ falseÀÎ setDoOutputÀ» true·Î
+			// POST ï¿½ï¿½Ã»ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½âº»ï¿½ï¿½ï¿½ï¿½ falseï¿½ï¿½ setDoOutputï¿½ï¿½ trueï¿½ï¿½
             
 			conn.setRequestMethod("POST");
 			conn.setDoOutput(true);
-			// POST ¿äÃ»¿¡ ÇÊ¿ä·Î ¿ä±¸ÇÏ´Â ÆÄ¶ó¹ÌÅÍ ½ºÆ®¸²À» ÅëÇØ Àü¼Û
+			// POST ï¿½ï¿½Ã»ï¿½ï¿½ ï¿½Ê¿ï¿½ï¿½ ï¿½ä±¸ï¿½Ï´ï¿½ ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             
 			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
 			StringBuilder sb = new StringBuilder();
 			sb.append("grant_type=authorization_code");
             
-			sb.append("&client_id=3d89a9ef169b204afc54cc08fa20632d"); //º»ÀÎÀÌ ¹ß±Þ¹ÞÀº key
-			sb.append("&redirect_uri=http://127.0.0.1:8080/user/kakaoLogin"); // º»ÀÎÀÌ ¼³Á¤ÇÑ ÁÖ¼Ò
+			sb.append("&client_id=3d89a9ef169b204afc54cc08fa20632d"); //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß±Þ¹ï¿½ï¿½ï¿½ key
+			sb.append("&redirect_uri=http://192.168.0.159:8080/user/kakaoLogin"); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¼ï¿½
 			
 //			grant_type=authorization_code&client_id=3d89a9ef169b204afc54cc08fa20632d&redirect_uri=http://127.0.0.1:8080/user/kakaoLogin&code=" + authorize_code
             //sb.append("&scope=profaccount_email");
@@ -56,12 +57,12 @@ public class KakaoService {
 			bw.write(sb.toString());
 			bw.flush();
             
-			// °á°ú ÄÚµå°¡ 200ÀÌ¶ó¸é ¼º°ø
+			// ï¿½ï¿½ï¿½ ï¿½Úµå°¡ 200ï¿½Ì¶ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			int responseCode = conn.getResponseCode();
 			System.out.println("responseCode : " + responseCode);
             
-			// ¿äÃ»À» ÅëÇØ ¾òÀº JSONÅ¸ÀÔÀÇ Response ¸Þ¼¼Áö ÀÐ¾î¿À±â
-			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "EUC-KR"));
+			// ï¿½ï¿½Ã»ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ JSONÅ¸ï¿½ï¿½ï¿½ï¿½ Response ï¿½Þ¼ï¿½ï¿½ï¿½ ï¿½Ð¾ï¿½ï¿½ï¿½ï¿½
+			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
 			String line = "";
 			String result = "";
             
@@ -96,7 +97,7 @@ public class KakaoService {
 	
 	public HashMap<String, Object> getUserInfo(String access_Token) throws Exception {
 
-		// ¿äÃ»ÇÏ´Â Å¬¶óÀÌ¾ðÆ®¸¶´Ù °¡Áø Á¤º¸°¡ ´Ù¸¦ ¼ö ÀÖ±â¿¡ HashMapÅ¸ÀÔÀ¸·Î ¼±¾ð
+		// ï¿½ï¿½Ã»ï¿½Ï´ï¿½ Å¬ï¿½ï¿½ï¿½Ì¾ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¸ï¿½ ï¿½ï¿½ ï¿½Ö±â¿¡ HashMapÅ¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		HashMap<String, Object> userInfo = new HashMap<String, Object>();
 		String reqURL = "https://kapi.kakao.com/v2/user/me";
 		try {
@@ -104,7 +105,7 @@ public class KakaoService {
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setRequestMethod("GET");
 
-			// ¿äÃ»¿¡ ÇÊ¿äÇÑ Header¿¡ Æ÷ÇÔµÉ ³»¿ë
+			// ï¿½ï¿½Ã»ï¿½ï¿½ ï¿½Ê¿ï¿½ï¿½ï¿½ Headerï¿½ï¿½ ï¿½ï¿½ï¿½Ôµï¿½ ï¿½ï¿½ï¿½ï¿½
 			conn.setRequestProperty("Authorization", "Bearer " + access_Token);
 			
 			
@@ -125,12 +126,12 @@ public class KakaoService {
 			
 			//JSONParser parser = new JSONParser(result);
 			JSONObject element = (JSONObject) JSONValue.parse(result);
-		
+			
 			String userId = mapper.readValue(element.get("id").toString(), String.class);
 			System.out.println("id : "+userId);
 			//JSONObject id = mapper.convertValue(element.get("id"), JSONObject.class);
 			JSONObject properties = mapper.convertValue(element.get("properties"), JSONObject.class);
-			System.out.println("properties Çüº¯È¯ : "+properties);
+			System.out.println("properties ï¿½ï¿½ï¿½ï¿½È¯ : "+properties);
 			JSONObject kakao_account = mapper.convertValue(element.get("kakao_account"), JSONObject.class);
 			//JSONObject properties =(JSONObject) element.get("properties");
 			//JSONObject kakao_account = (JSONObject) element.get("kakao_account");
@@ -143,8 +144,8 @@ public class KakaoService {
 			userInfo.put("nickname", nickname);
 			userInfo.put("email", email);
 			userInfo.put("id", userId);
-			System.out.println("#####´Ð³×ÀÓ"+userInfo.get("nickname"));
-			System.out.println("#####ÀÌ¸ÞÀÏ"+userInfo.get("email"));
+			System.out.println("#####ï¿½Ð³ï¿½ï¿½ï¿½"+userInfo.get("nickname"));
+			System.out.println("#####ï¿½Ì¸ï¿½ï¿½ï¿½"+userInfo.get("email"));
 			
 			KakaoService ks = new KakaoService(); 
 			

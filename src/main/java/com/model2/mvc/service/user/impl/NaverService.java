@@ -10,22 +10,18 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.ibatis.reflection.SystemMetaObject;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import com.model2.mvc.service.domain.User;
 import com.model2.mvc.service.naver.NaverDao;
 
-@Controller
+@Service
 public class NaverService {
     
 	@Autowired
@@ -33,46 +29,45 @@ public class NaverService {
 	private NaverDao naverDao;
 	
 	 
-	public String getAccessToken(String authorize_code) { //statºÎºĞ Ãß°¡
+	public String getAccessToken(String authorize_code) { //statï¿½Îºï¿½ ï¿½ß°ï¿½
+		
 		String access_Token = "";
 		String refresh_Token = "";
 		String reqURL = "https://nid.naver.com/oauth2.0/token";
 
 		try {
 			URL url = new URL(reqURL);
+			System.out.println("ì—¬ê¸°ê¹Œì§€ ì‹¤í–‰ë¨111111111111111");
             
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-			// POST ¿äÃ»À» À§ÇØ ±âº»°ªÀÌ falseÀÎ setDoOutputÀ» true·Î
+			// POST ï¿½ï¿½Ã»ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½âº»ï¿½ï¿½ï¿½ï¿½ falseï¿½ï¿½ setDoOutputï¿½ï¿½ trueï¿½ï¿½
             
 			conn.setRequestMethod("POST");
 			conn.setDoOutput(true);
-			// POST ¿äÃ»¿¡ ÇÊ¿ä·Î ¿ä±¸ÇÏ´Â ÆÄ¶ó¹ÌÅÍ ½ºÆ®¸²À» ÅëÇØ Àü¼Û
+			System.out.println("ì—¬ê¸°ê¹Œì§€ ì‹¤í–‰ë¨22");
+			// POST ï¿½ï¿½Ã»ï¿½ï¿½ ï¿½Ê¿ï¿½ï¿½ ï¿½ä±¸ï¿½Ï´ï¿½ ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             
 			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
 			StringBuilder sb = new StringBuilder();
 			sb.append("grant_type=authorization_code");
-            
-			sb.append("&client_id=FzMGbETEgw2xNeSUlIIF"); //º»ÀÎÀÌ ¹ß±Ş¹ŞÀº key
-			sb.append("&client_secret=voluTpxuLM"); // º»ÀÎÀÌ ¹ß±Ş¹ŞÀº secret                                         ³×ÀÌ¹ö¿¡ Ãß°¡ÇÔ
-			sb.append("&redirect_uri=http://192.168.0.159:8080/user/naverLogin"); // º»ÀÎÀÌ ¼³Á¤ÇÑ ÁÖ¼Ò
-			
-//			grant_type=authorization_code&client_id=3d89a9ef169b204afc54cc08fa20632d&redirect_uri=http://127.0.0.1:8080/user/kakaoLogin&code=" + authorize_code
-            //sb.append("&scope=profaccount_email");
+			sb.append("&client_id=FzMGbETEgw2xNeSUlIIF"); //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß±Ş¹ï¿½ï¿½ï¿½ key
+			sb.append("&client_secret=voluTpxuLM"); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß±Ş¹ï¿½ï¿½ï¿½ secret                                         ï¿½ï¿½ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ï¿½ï¿½
+			sb.append("&redirect_uri=http://192.168.0.159:8080/user/naverLogin"); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¼ï¿½
 			sb.append("&code=" + authorize_code);
-			sb.append("&state=url_parameter"); //¿©±â ´Ù½Ã Ãß°¡
-//			sb.append("&state=" + state);  	// ¿©±â Ãß°¡ÇÔ
+			sb.append("&state=test"); //ï¿½ï¿½ï¿½ï¿½ ï¿½Ù½ï¿½ ï¿½ß°ï¿½
 			bw.write(sb.toString());
 			bw.flush();
+			System.out.println("ì—¬ê¸°ê¹Œì§€ ì‹¤í–‰ë¨33");
             
-			// °á°ú ÄÚµå°¡ 200ÀÌ¶ó¸é ¼º°ø
+			// ï¿½ï¿½ï¿½ ï¿½Úµå°¡ 200ï¿½Ì¶ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			int responseCode = conn.getResponseCode();
 			System.out.println("responseCode : " + responseCode);
             
-			// ¿äÃ»À» ÅëÇØ ¾òÀº JSONÅ¸ÀÔÀÇ Response ¸Ş¼¼Áö ÀĞ¾î¿À±â
-			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "EUC-KR"));
+			// ï¿½ï¿½Ã»ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ JSONÅ¸ï¿½ï¿½ï¿½ï¿½ Response ï¿½Ş¼ï¿½ï¿½ï¿½ ï¿½Ğ¾ï¿½ï¿½ï¿½ï¿½
+			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
 			String line = "";
 			String result = "";
-            
+			System.out.println("ì—¬ê¸°ê¹Œì§€ ì‹¤í–‰ë¨44");
 			while ((line = br.readLine()) != null) {
 				result += line;
 			}
@@ -80,6 +75,7 @@ public class NaverService {
 			
 			ObjectMapper objectMapper = new ObjectMapper();
 			// JSON String -> Map
+			System.out.println("ì—¬ê¸°ê¹Œì§€ ì‹¤í–‰ë¨55");
 			Map<String, Object> jsonMap = objectMapper.readValue(result, new TypeReference<Map<String, Object>>() {
 			});
 				
@@ -91,6 +87,7 @@ public class NaverService {
             
 			br.close();
 			bw.close();
+			System.out.println("ì—¬ê¸°ê¹Œì§€ ì‹¤í–‰ë¨66");
 			
 			
 			
@@ -105,7 +102,7 @@ public class NaverService {
 	
 	public HashMap<String, Object> getUserInfo(String access_Token) throws Exception {
 
-		// ¿äÃ»ÇÏ´Â Å¬¶óÀÌ¾ğÆ®¸¶´Ù °¡Áø Á¤º¸°¡ ´Ù¸¦ ¼ö ÀÖ±â¿¡ HashMapÅ¸ÀÔÀ¸·Î ¼±¾ğ
+		// ï¿½ï¿½Ã»ï¿½Ï´ï¿½ Å¬ï¿½ï¿½ï¿½Ì¾ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¸ï¿½ ï¿½ï¿½ ï¿½Ö±â¿¡ HashMapÅ¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		HashMap<String, Object> userInfo = new HashMap<String, Object>();
 		String reqURL = "https://openapi.naver.com/v1/nid/me";
 		try {
@@ -113,7 +110,7 @@ public class NaverService {
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setRequestMethod("GET");
 
-			// ¿äÃ»¿¡ ÇÊ¿äÇÑ Header¿¡ Æ÷ÇÔµÉ ³»¿ë
+			// ï¿½ï¿½Ã»ï¿½ï¿½ ï¿½Ê¿ï¿½ï¿½ï¿½ Headerï¿½ï¿½ ï¿½ï¿½ï¿½Ôµï¿½ ï¿½ï¿½ï¿½ï¿½
 			conn.setRequestProperty("Authorization", "Bearer " + access_Token);
 			System.out.println("NaverService getUserInfo "+access_Token);
 			
@@ -130,17 +127,42 @@ public class NaverService {
 				result += line;
 			}
 			System.out.println("NaverService.java response body : " + result);
-			
+			System.out.println("ì—¬ê¸°ê¹Œì§€ ì‹¤í–‰ë¨77");
 			ObjectMapper mapper = new ObjectMapper();
 			
 			//JSONParser parser = new JSONParser(result);
-			JSONObject element = (JSONObject) JSONValue.parse(result);
-		
-			String userId = mapper.readValue(element.get("id").toString(), String.class);
-			System.out.println("NaverService.java id : "+userId);
+//			JSONObject element = (JSONObject) JSONValue.parse(result);
+			JSONObject responseObject = (JSONObject) JSONValue.parse(result);
+			JSONObject element = (JSONObject) responseObject.get("response");
+			System.out.println("ì—¬ê¸°ê¹Œì§€ ì‹¤í–‰ë¨88");
+//			String userId = mapper.readValue(element.get("id").toString(), String.class);
+			
+			Object idObject = element.get("id");
+			if (idObject != null) {
+			    String userId = mapper.readValue(idObject.toString(), String.class);
+			    // Rest of the code that uses userId
+			} else {
+			    System.out.println("Error: idObject is null.");
+			}
+			
+			String userId = null;
+			if (idObject != null) {
+			    userId = mapper.readValue(idObject.toString(), String.class);
+			} else {
+			    System.out.println("Error: idObject is null.");
+			}
+			
+			
+			System.out.println("ì—¬ê¸°ê¹Œì§€ ì‹¤í–‰ë¨99");
+			if(userId != null) {
+			System.out.println("idê°’ ë„˜ì–´ì˜´ ì•„ì´ë””ê°’ì€ : "+userId);
+			}else {
+				System.out.println("idê°’ ì•ˆë„˜ì–´ì˜´ ë„ì„!!!");
+			}
+			System.out.println("ì—¬ê¸°ê¹Œì§€ ì‹¤í–‰ë¨10");
 			//JSONObject id = mapper.convertValue(element.get("id"), JSONObject.class);
 			JSONObject properties = mapper.convertValue(element.get("properties"), JSONObject.class);
-			System.out.println("NaverService.java properties Çüº¯È¯ : "+properties);
+			System.out.println("NaverService.java properties ï¿½ï¿½ï¿½ï¿½È¯ : "+properties);
 			JSONObject naver_account = mapper.convertValue(element.get("naver_account"), JSONObject.class);
 			//JSONObject properties =(JSONObject) element.get("properties");
 			//JSONObject kakao_account = (JSONObject) element.get("kakao_account");
@@ -153,8 +175,8 @@ public class NaverService {
 			userInfo.put("nickname", nickname);
 			userInfo.put("email", email);
 			userInfo.put("id", userId);
-			System.out.println("NaverService.java#####´Ğ³×ÀÓ"+userInfo.get("nickname"));
-			System.out.println("NaverService.java#####ÀÌ¸ŞÀÏ"+userInfo.get("email"));
+			System.out.println("NaverService.java#####ï¿½Ğ³ï¿½ï¿½ï¿½"+userInfo.get("nickname"));
+			System.out.println("NaverService.java#####ï¿½Ì¸ï¿½ï¿½ï¿½"+userInfo.get("email"));
 			
 			NaverService ns = new NaverService(); 
 			
@@ -182,97 +204,4 @@ public class NaverService {
 	}
 	
 }
-
-//public String getAccessToken (String authorize_code) {
-//	String access_Token = "";
-//	String reqURL = "https://nid.naver.com/oauth2.0/token";
-//	
-//    try {
-//        URL url = new URL(reqURL);
-//        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-//        
-//        //POST ¿äÃ»À» À§ÇØ ±âº»°ªÀÌ falseÀÎ setDoOutputÀ» true·Î
-//        conn.setRequestMethod("POST");
-//        conn.setDoOutput(true);
-//        //POST ¿äÃ»¿¡ ÇÊ¿ä·Î ¿ä±¸ÇÏ´Â ÆÄ¶ó¹ÌÅÍ ½ºÆ®¸²À» ÅëÇØ Àü¼Û
-//        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
-//        StringBuilder sb = new StringBuilder();
-//        sb.append("grant_type=authorization_code");
-//        sb.append("&client_id=FzMGbETEgw2xNeSUlIIF");
-//        sb.append("&client_secret=voluTpxuLM");
-//        sb.append("&redirect_uri=http://192.168.0.159:8080/user/naverLogin");
-//        sb.append("&code="+authorize_code);
-//        sb.append("&state=url_parameter");
-//        bw.write(sb.toString());
-//        bw.flush();
-//        
-//        //°á°ú ÄÚµå°¡ 200ÀÌ¶ó¸é ¼º°ø
-//        int responseCode = conn.getResponseCode();
-//        if(responseCode==200){
-//            //¿äÃ»À» ÅëÇØ ¾òÀº JSONÅ¸ÀÔÀÇ Response ¸Ş¼¼Áö ÀĞ¾î¿À±â
-//            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-//            String line = "";
-//            String result = "";
-//            
-//            while ((line = br.readLine()) != null) {
-//                result += line;
-//            }
-//            
-//            //Gson ¶óÀÌºê·¯¸®¿¡ Æ÷ÇÔµÈ Å¬·¡½º·Î JSONÆÄ½Ì °´Ã¼ »ı¼º
-//            JsonParser parser = new JsonParser();
-//            JsonElement element = parser.parse(result);
-//            
-//            access_Token = element.getAsJsonObject().get("access_token").getAsString();
-//          //refresh_Token = element.getAsJsonObject().get("refresh_token").getAsString();
-//            br.close();
-//            bw.close();
-//        }
-//    } catch (IOException e) {
-//        e.printStackTrace();
-//    } 
-//    
-//    return access_Token;
-//}
-	
-//	public void getUserInfo (String access_Token) {
-//	    //¿äÃ»ÇÏ´Â Å¬¶óÀÌ¾ğÆ®¸¶´Ù °¡Áø Á¤º¸°¡ ´Ù¸¦ ¼ö ÀÖ±â¿¡ HashMapÅ¸ÀÔÀ¸·Î ¼±¾ğ
-//	    HashMap<String, Object> naverUserInfo = new HashMap<>();
-//	    String reqURL = "https://openapi.naver.com/v1/nid/me";
-//	    try {
-//	        URL url = new URL(reqURL);
-//	        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-//	        conn.setRequestMethod("POST");
-//	        
-//	        //¿äÃ»¿¡ ÇÊ¿äÇÑ Header¿¡ Æ÷ÇÔµÉ ³»¿ë
-//	        conn.setRequestProperty("Authorization", "Bearer " + access_Token);
-//	        
-//	        int responseCode = conn.getResponseCode();
-//	        if(responseCode == 200){
-//		        BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-//		        
-//		        String line = "";
-//		        String result = "";
-//		        
-//		        while ((line = br.readLine()) != null) {
-//		            result += line;
-//		        }
-//		        JsonParser parser = new JsonParser();
-//		        JsonElement element = parser.parse(result);
-//		        
-//		        JsonObject response = element.getAsJsonObject().get("response").getAsJsonObject();
-//		        
-//		        String name = response.getAsJsonObject().get("name").getAsString();
-//		        String email = response.getAsJsonObject().get("email").getAsString();
-//		        String id = "NAVER_"+response.getAsJsonObject().get("id").getAsString();
-//		        
-//		        naverUserInfo.put("name", name);
-//		        naverUserInfo.put("email", email);
-//		        naverUserInfo.put("id", id);
-//		        
-//	        }
-//	    } catch (IOException e) {
-//	        e.printStackTrace();
-//	    }
-//	}
-	
 	

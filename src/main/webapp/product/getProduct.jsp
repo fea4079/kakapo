@@ -32,7 +32,7 @@
 
 <!--  ///////////////////////// CSS ////////////////////////// -->
 <style>
-body > div.container {
+body>div.container {
 	border: 3px solid #D6CDB7;
 	margin-top: 20px;
 }
@@ -60,61 +60,72 @@ body > div.container {
 
 <body>
 	<jsp:include page="/layout/toolbar.jsp" />
-	
+
 	<div class="container">
-	
-	
-	<div class="page-header">
-	       <h3 class=" text-info">상품관리</h3>
-	</div>
-	
-	<div class="row">
-	  		<div class="col-xs-4 col-md-2"><strong>상 품 명</strong></div>
-			<div class="col-xs-8 col-md-4">${product.prodName}</div>
-	</div>
-	
-	<div class="row">
-	  		<div class="col-xs-4 col-md-2"><strong>상품상세정보</strong></div>
-			<div class="col-xs-8 col-md-4">${product.prodDetail}</div>
-	</div>
-	
-	<div class="row">
-	  		<div class="col-xs-4 col-md-2"><strong>제조일자</strong></div>
-			<div class="col-xs-8 col-md-4">${product.manuDate}</div>
-	</div>
-	
-	<div class="row">
-	  		<div class="col-xs-4 col-md-2"><strong>가    격</strong></div>
-			<div class="col-xs-8 col-md-4">${product.price}</div>
-	</div>
-	
-	<div class="row">
-	  		<div class="col-xs-4 col-md-2"><strong>상품이미지</strong></div>
-			<div class="col-xs-8 col-md-4">
-			<img src="/images/uploadFiles/${product.fileName}" />
-			<input type="hidden" name="fileName" />
-			</div>
-	</div>
-	
-	<hr/>
-	<div class="row">
-	  		<div class="col-md-12 text-center ">
-	  			<button type="button" class="btn btn-primary">확인</button>
-				<input type="hidden" id="prodNo" name="prodNo" value="${product.prodNo}"/>
-				<input type="hidden" id="menu" name="managa" value="${param.menu}" />
-								
-	  		</div>
-	</div>
-	
-	<div class="row">
-	  		<div class="col-md-12 text-center ">
-	  			<button type="button" class="btn btn-primary">추가등록</button>
-	  		</div>
+
+
+		<div class="page-header">
+			<h3 class=" text-info">상품관리</h3>
 		</div>
-		
-	<br/>
-	
-	<%-- <table width="100%" border="0" cellspacing="0" cellpadding="0"
+
+		<div class="row">
+			<div class="col-xs-4 col-md-2">
+				<strong>상 품 명</strong>
+			</div>
+			<div class="col-xs-8 col-md-4">${product.prodName}</div>
+		</div>
+
+		<div class="row">
+			<div class="col-xs-4 col-md-2">
+				<strong>상품상세정보</strong>
+			</div>
+			<div class="col-xs-8 col-md-4">${product.prodDetail}</div>
+		</div>
+
+		<div class="row">
+			<div class="col-xs-4 col-md-2">
+				<strong>제조일자</strong>
+			</div>
+			<div class="col-xs-8 col-md-4">${product.manuDate}</div>
+		</div>
+
+		<div class="row">
+			<div class="col-xs-4 col-md-2">
+				<strong>가 격</strong>
+			</div>
+			<div class="col-xs-8 col-md-4">${product.price}</div>
+		</div>
+
+		<div class="row">
+			<div class="col-xs-4 col-md-2">
+				<strong>상품이미지</strong>
+			</div>
+			<div class="col-xs-8 col-md-4">
+				<img src="/images/uploadFiles/${product.fileName}" /> <input
+					type="hidden" name="fileName" />
+			</div>
+		</div>
+
+		<hr />
+		<div class="row">
+			<div class="col-md-12 text-center ">
+				<button type="button" class="btn btn-primary">확인</button>
+				<input type="hidden" id="prodNo" name="prodNo"
+					value="${product.prodNo}" /> <input type="hidden" id="menu"
+					name="managa" value="${param.menu}" />
+
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12 text-center ">
+				<button type="button" class="btn btn-primary">추가등록</button>
+			</div>
+		</div>
+
+		<br />
+
+		<%-- <table width="100%" border="0" cellspacing="0" cellpadding="0"
 		style="margin-top: 10px;">
 		<tr>
 			<td width="53%"></td>
@@ -141,7 +152,7 @@ body > div.container {
 			</td>
 		</tr>
 	</table> --%>
-	
+
 	</div>
 	<% System.out.println("getProduct.jsp 4444444444444444444444444444444444444444444"); %>
 </body>

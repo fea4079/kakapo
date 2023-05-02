@@ -1,31 +1,34 @@
-<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page pageEncoding="UTF-8"%>
 
 <!--  ///////////////////////// JSTL  ////////////////////////// -->
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
 <!DOCTYPE html>
 
 <html lang="ko">
-	
+
 <head>
-	<meta charset="UTF-8">
-	
-	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	
-	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
-	
-	<!--  ///////////////////////// CSS ////////////////////////// -->
-	<style></style>
-    
-     <!--  ///////////////////////// JavaScript ////////////////////////// -->
-	<script type="text/javascript">
+<meta charset="UTF-8">
+
+<!-- 참조 : http://getbootstrap.com/css/   참조 -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<!--  ///////////////////////// CSS ////////////////////////// -->
+<style></style>
+
+<!--  ///////////////////////// JavaScript ////////////////////////// -->
+<script type="text/javascript">
 	
 		//=============  "중복확인"  Event 처리 =============
 		$(function() {
@@ -72,52 +75,54 @@
 		});
 
 	</script>
-	
+
 </head>
 
 <body>
-	
+
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container">
-		
-		<br/><br/>
-		
+
+		<br />
+		<br />
+
 		<!-- form Start /////////////////////////////////////-->
 		<form class="form-inline">
-		
-		  <div class="form-group">
-		    <label for="userId">아 이 디</label>
-		    <input type="text" class="form-control" name="userId" id="userId"  placeholder="아이디"
-		    																		value="${ ! empty result && result ? userId : '' }" >
-		  </div>
-		  <button type="button" class="btn btn-info">중복확인</button>
-		  
-		  <c:if test="${ ! empty result }">
-		  	<c:if test="${ result =='true' }">
-		  		<button type="button" class="btn btn-success">사 용</button>
-		  	</c:if>
-		  </c:if>
-		  
-		  <button type="button" class="btn btn-primary">닫 기</button>
-		  
-		  <c:if test="${ empty result }">
-		  	<span class="text-info glyphicon glyphicon-ok">입력후중복확인</span>
-		  </c:if>
-		  
-		  <c:if test="${ ! empty result }">
-		  	<c:if test="${ result =='true' }">
-				<span class="text-success glyphicon glyphicon-ok">사용가능 &nbsp;</span>
+
+			<div class="form-group">
+				<label for="userId">아 이 디</label> <input type="text"
+					class="form-control" name="userId" id="userId" placeholder="아이디"
+					value="${ ! empty result && result ? userId : '' }">
+			</div>
+			<button type="button" class="btn btn-info">중복확인</button>
+
+			<c:if test="${ ! empty result }">
+				<c:if test="${ result =='true' }">
+					<button type="button" class="btn btn-success">사 용</button>
+				</c:if>
 			</c:if>
-			<c:if test="${ result=='false' }">
-		 		<span class="text-danger glyphicon glyphicon-remove">사용불가능</span>
+
+			<button type="button" class="btn btn-primary">닫 기</button>
+
+			<c:if test="${ empty result }">
+				<span class="text-info glyphicon glyphicon-ok">입력후중복확인</span>
 			</c:if>
-		  </c:if>
-		 
+
+			<c:if test="${ ! empty result }">
+				<c:if test="${ result =='true' }">
+					<span class="text-success glyphicon glyphicon-ok">사용가능
+						&nbsp;</span>
+				</c:if>
+				<c:if test="${ result=='false' }">
+					<span class="text-danger glyphicon glyphicon-remove">사용불가능</span>
+				</c:if>
+			</c:if>
+
 		</form>
 		<!-- form Start /////////////////////////////////////-->
-	
- 	</div>
- 	<!--  화면구성 div End /////////////////////////////////////-->
+
+	</div>
+	<!--  화면구성 div End /////////////////////////////////////-->
 
 </body>
 

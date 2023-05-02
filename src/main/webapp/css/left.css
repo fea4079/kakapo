@@ -1,85 +1,113 @@
+/* ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ */
+IMG {
+	border-style: none
+}
 
-/* ÀÌ¹ÌÁö º¸´õ¶óÀÎ »èÁ¦ */
-IMG {  border-style: none}
-
-/* ½ºÅ©·Ñ¹Ù Á¤ÀÇ */
+/* ï¿½ï¿½Å©ï¿½Ñ¹ï¿½ ï¿½ï¿½ï¿½ï¿½ */
 BODY {
-scrollbar-3dlight-color: #ffffff;
-scrollbar-highlight-color: #ffffff;
-scrollbar-face-color: #DEE7EB;
-scrollbar-arrow-color: #6F9BAA;
-scrollbar-track-color: #F7F7F7;
-scrollbar-darkshadow-color: #ffffff;
-scrollbar-shadow-color: #B8C4C5;}
+	scrollbar-3dlight-color: #ffffff;
+	scrollbar-highlight-color: #ffffff;
+	scrollbar-face-color: #DEE7EB;
+	scrollbar-arrow-color: #6F9BAA;
+	scrollbar-track-color: #F7F7F7;
+	scrollbar-darkshadow-color: #ffffff;
+	scrollbar-shadow-color: #B8C4C5;
+}
 
+a.menu {
+	font-size: 9pt;
+	font-family: ï¿½ï¿½ï¿½ï¿½Ã¼;
+	color: #ff0000;
+	text-decoration: none;
+}
 
-a.menu		{ font-size: 9pt; font-family: ±¼¸²Ã¼; color: #ff0000; text-decoration: none; }
+/* ï¿½ï¿½Å© ï¿½Ó¼ï¿½ */
+A .:link {
+	color: #333333;
+	text-decoration: none;
+	cursor: hand
+}
 
-/* ¸µÅ© ¼Ó¼º */
-A.:link {  color: #333333 ; text-decoration: none; cursor:hand}
-A.:hover {  color: #347BD9 ;text-decoration: none; }
-A.:active {  color: #347BD9 ; text-decoration: none;}
-A.:visited {  color: #333333 ; text-decoration: none;}
-A.: { onfocus : "this.blur();" }
+A .:hover {
+	color: #347BD9;
+	text-decoration: none;
+}
 
+A .:active {
+	color: #347BD9;
+	text-decoration: none;
+}
 
-/* ÀüÃ¼ ÅØ½ºÆ® ¼Ó¼º */
-BODY, TABLE, TR, TD, SELECT,INPUT,DIV,SPAN,FORM,TEXTAREA
-{ font-family: "MS Gothic"; font-size: 12px; color: #333333; }
+A .:visited {
+	color: #333333;
+	text-decoration: none;
+}
 
-/* Å¸ÀÌÆ²1 ¹è°æÀÌ¹ÌÁö¿Í ÅØ½ºÆ® ¼Ó¼º */
- .Depth01 { 
-		font-size: 14px; 
+A .: {
+	onfocus: "this.blur();"
+}
+
+/* ï¿½ï¿½Ã¼ ï¿½Ø½ï¿½Æ® ï¿½Ó¼ï¿½ */
+BODY, TABLE, TR, TD, SELECT, INPUT, DIV, SPAN, FORM, TEXTAREA {
+	font-family: "MS Gothic";
+	font-size: 12px;
+	color: #333333;
+}
+
+/* Å¸ï¿½ï¿½Æ²1 ï¿½ï¿½ï¿½ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ø½ï¿½Æ® ï¿½Ó¼ï¿½ */
+.Depth01 {
+	font-size: 14px;
 	color: #ffffff;
-	font-weight:bold;
+	font-weight: bold;
 	line-height: 26px;
 	text-indent: 15px;
 	background-image: url(/sample/images/left/leftMenuDep01Bg.gif);
-	background-repeat:no-repeat;
-   	}
- 
- 	 /* Å¸ÀÌÆ²2 ¹è°æÀÌ¹ÌÁö¿Í ÅØ½ºÆ® ¼Ó¼º - ¸¶¿ì½º ÀÌº¥Æ®°¡ ¾øÀ»¶§¿Í ±âº»ÀÏ¶§.*/
-	.Depth02on { 
-	font-size: 12px; 
+	background-repeat: no-repeat;
+}
+
+/* Å¸ï¿½ï¿½Æ²2 ï¿½ï¿½ï¿½ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ø½ï¿½Æ® ï¿½Ó¼ï¿½ - ï¿½ï¿½ï¿½ì½º ï¿½Ìºï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½âº»ï¿½Ï¶ï¿½.*/
+.Depth02on {
+	font-size: 12px;
 	line-height: 25px;
 	color: #505050;
-	font-weight:normal;
+	font-weight: normal;
 	text-indent: 19px;
 	background-image: url(/sample/images/left/leftMenuDep02_on.gif);
-	background-repeat:no-repeat;
-  	}
-  
-   /* Å¸ÀÌÆ²2 ¹è°æÀÌ¹ÌÁö¿Í ÅØ½ºÆ® ¼Ó¼º - ¸¶¿ì½º ÀÌº¥Æ®°¡ ¾øÀ»¶§¿Í ±âº»ÀÏ¶§.*/
-	.Depth02off { 
-	 font-size: 12px; 
+	background-repeat: no-repeat;
+}
+
+/* Å¸ï¿½ï¿½Æ²2 ï¿½ï¿½ï¿½ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ø½ï¿½Æ® ï¿½Ó¼ï¿½ - ï¿½ï¿½ï¿½ì½º ï¿½Ìºï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½âº»ï¿½Ï¶ï¿½.*/
+.Depth02off {
+	font-size: 12px;
 	line-height: 25px;
 	color: #505050;
-	font-weight:normal;
+	font-weight: normal;
 	text-indent: 19px;
 	background-image: url(/sample/images/left/leftMenuDep02_off.gif);
-	background-repeat:no-repeat;
-  	}
+	background-repeat: no-repeat;
+}
 
-/* Å¸ÀÌÆ²3 ¹è°æÀÌ¹ÌÁö¿Í ÅØ½ºÆ® ¼Ó¼º */
-	.Depth03 { 
-	font-size: 12px; 
+/* Å¸ï¿½ï¿½Æ²3 ï¿½ï¿½ï¿½ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ø½ï¿½Æ® ï¿½Ó¼ï¿½ */
+.Depth03 {
+	font-size: 12px;
 	line-height: 20px;
 	color: #505050;
-	font-weight:normal;
+	font-weight: normal;
 	text-indent: 14px;
 	background-image: url(/sample/images/left/leftMenuDep03Bg.gif);
-	background-repeat:no-repeat;
- 	}
+	background-repeat: no-repeat;
+}
 
-	.DepthEnd {
-background-image: url(/sample/images/left/space_line.gif);
-line-height: 5px;
-background-repeat:no-repeat;
-	}
-	
-/* Å¸ÀÌÆ²1 ¹è°æÀÌ¹ÌÁö¿Í ÅØ½ºÆ® ¼Ó¼º */	
+.DepthEnd {
+	background-image: url(/sample/images/left/space_line.gif);
+	line-height: 5px;
+	background-repeat: no-repeat;
+}
+
+/* Å¸ï¿½ï¿½Æ²1 ï¿½ï¿½ï¿½ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ø½ï¿½Æ® ï¿½Ó¼ï¿½ */
 .layer_submenu_bg {
-	background-image:  url(/sample/images/left/menuLayerBg.gif);
+	background-image: url(/sample/images/left/menuLayerBg.gif);
 	background-position: right;
 	background-repeat: repeat;
 	text-align: center;
+}

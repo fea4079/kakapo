@@ -24,7 +24,7 @@ import com.model2.mvc.service.user.impl.NaverService;
 import com.model2.mvc.service.user.impl.KakaoService;
 
 
-//==> È¸¿ø°ü¸® Controller
+//==> È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Controller
 @Controller
 @RequestMapping("/user/*")
 public class UserController {
@@ -33,7 +33,7 @@ public class UserController {
 	@Autowired
 	@Qualifier("userServiceImpl")
 	private UserService userService;
-	//setter Method ±¸Çö ¾ÊÀ½
+	//setter Method ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		
 	public UserController(){
 		System.out.println(this.getClass());
@@ -46,6 +46,7 @@ public class UserController {
 	
 	@Autowired
 	private KakaoService ks;
+	@Autowired
 	private NaverService ns;
 	
 	
@@ -74,7 +75,7 @@ public class UserController {
 		System.out.println("/user/getUser : GET");
 		//Business Logic
 		User user = userService.getUser(userId);
-		// Model °ú View ¿¬°á
+		// Model ï¿½ï¿½ View ï¿½ï¿½ï¿½ï¿½
 		model.addAttribute("user", user);
 		
 		return "forward:/user/getUser.jsp";
@@ -87,7 +88,7 @@ public class UserController {
 		System.out.println("/user/updateUser : GET");
 		//Business Logic
 		User user = userService.getUser(userId);
-		// Model °ú View ¿¬°á
+		// Model ï¿½ï¿½ View ï¿½ï¿½ï¿½ï¿½
 		model.addAttribute("user", user);
 		
 		return "forward:/user/updateUser.jsp";
@@ -149,7 +150,7 @@ public class UserController {
 		System.out.println("/user/checkDuplication : POST");
 		//Business Logic
 		boolean result=userService.checkDuplication(userId);
-		// Model °ú View ¿¬°á
+		// Model ï¿½ï¿½ View ï¿½ï¿½ï¿½ï¿½
 		model.addAttribute("result", new Boolean(result));
 		model.addAttribute("userId", userId);
 
@@ -167,13 +168,13 @@ public class UserController {
 		}
 		search.setPageSize(pageSize);
 		
-		// Business logic ¼öÇà
+		// Business logic ï¿½ï¿½ï¿½ï¿½
 		Map<String , Object> map=userService.getUserList(search);
 		
 		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
 		System.out.println(resultPage);
 		
-		// Model °ú View ¿¬°á
+		// Model ï¿½ï¿½ View ï¿½ï¿½ï¿½ï¿½
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("resultPage", resultPage);
 		model.addAttribute("search", search);
@@ -195,7 +196,7 @@ public class UserController {
 		System.out.println("UserController.java kakao#5555#email#### : " + userInfo.get("email"));
         
 		User dbUser=ks.getKakaoUser((String)userInfo.get("id"));
-		System.out.println("6666 userÈ®ÀÎ"+dbUser);
+		System.out.println("6666 userÈ®ï¿½ï¿½"+dbUser);
 		
 		session.setAttribute("user", dbUser);
 		
@@ -216,7 +217,7 @@ public class UserController {
 		System.out.println("UserController.java naver#5555#email#### : " + userInfo.get("email"));
         
 		User dbUser=ns.getNaverUser((String)userInfo.get("id"));
-		System.out.println("UserController.java naver#6666#userÈ®ÀÎ"+dbUser);
+		System.out.println("UserController.java naver#6666#user"+dbUser);
 		
 		session.setAttribute("user", dbUser);
 		

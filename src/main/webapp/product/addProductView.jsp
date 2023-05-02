@@ -12,10 +12,13 @@
 <!-- 참조 : http://getbootstrap.com/css/   참조 -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <!--  <script type="text/javascript" src="../javascript/calendar.js"> -->
 
 
@@ -70,7 +73,7 @@ body>div.container {
 
 <body>
 	<jsp:include page="/layout/toolbar.jsp" />
-	
+
 	<div class="navbar  navbar-default">
 		<div class="container">
 			<a class="navbar-brand" href="http://192.168.0.159:8080/">Model2
@@ -94,7 +97,7 @@ body>div.container {
 				<label for="prodName" class="col-sm-offset-1 col-sm-3 control-label">상품명</label>
 				<div class="col-sm-4">
 					<input type="text" class="form-control" id="prodName"
-						name="prodName" placeholder="제품명 입력하세요" >
+						name="prodName" placeholder="제품명 입력하세요">
 				</div>
 			</div>
 
@@ -106,13 +109,15 @@ body>div.container {
 						name="prodDetail" placeholder="상품상세정보 입력">
 				</div>
 			</div>
-			<div class="form-group"> <!-- data-provide="datepicker"
+			<div class="form-group">
+				<!-- data-provide="datepicker"
 				data-date-format="yyyy-mm-dd">
 				input-group date -->
 				<label for="manuDate" class="col-sm-offset-1 col-sm-3 control-label">제조일자</label>
 				<div class="col-sm-4">
 					<input type="date" class="form-control" id="manuDate"
-						name="manuDate" placeholder="제조일자"> <!-- <span class="glyphicon glyphicon-th"></span> -->
+						name="manuDate" placeholder="제조일자">
+					<!-- <span class="glyphicon glyphicon-th"></span> -->
 				</div>
 			</div>
 
@@ -124,14 +129,14 @@ body>div.container {
 				</div>
 			</div>
 
-			 <div class="form-group">
+			<div class="form-group">
 				<label for="fileName"
 					class="col-sm-offset-1 col-sm-3 control-label form-label">상품이미지</label>
 				<div class="col-sm-4">
-					<input type="file" class="form-control" id="uploadFile"
-						name="file" placeholder="업로드할 파일 선택">
+					<input type="file" class="form-control" id="uploadFile" name="file"
+						placeholder="업로드할 파일 선택">
 				</div>
-			</div>  
+			</div>
 
 
 
@@ -144,6 +149,6 @@ body>div.container {
 		</form>
 	</div>
 	<% System.out.println("addProductView.jsp 33333333333333333333333333333333333333333"); %>
-	
+
 </body>
 </html>

@@ -164,7 +164,7 @@
 					    <div class="col-sm-offset-4 col-sm-6 text-center">
 					      <button type="button" class="btn btn-primary"  >로 &nbsp;그 &nbsp;인</button>
 					      <a class="btn btn-primary btn" href="#" role="button">회 &nbsp;원 &nbsp;가 &nbsp;입</a>
-					      <a href="https://kauth.kakao.com/oauth/authorize?client_id=5d88ee6131a76417bcf8e0d0dc852d91&scope=profile_nickname,profile_image,account_email&redirect_uri=http://127.0.0.1:8080/user/kakaoLogin&response_type=code">
+					      <a href="https://kauth.kakao.com/oauth/authorize?client_id=5d88ee6131a76417bcf8e0d0dc852d91&scope=profile_nickname,profile_image,account_email&redirect_uri=http://192.168.0.159:8080/user/kakaoLogin&response_type=code">
 					      <img class="btn-img" src="/images/kakao_login_medium_narrow.png"></a>
 					      <!-- <a href="https://kauth.kakao.com/oauth/authorize?client_id=04012ee167a54fddf374766087a27fea&scope=profile_nickname,profile_image,account_email&redirect_uri=http://127.0.0.1:8080/user/kakaoLogin&response_type=code"><img class="btn-img" src="/images/kakao_login_medium_narrow.png"></a> -->
 					     <!--  <a href="https://nid.naver.com/oauth2.0/authorize?client_id={클라이언트 아이디}&response_type=code&redirect_uri={http://127.0.0.1:8080/index.jsp}&state={상태 토큰}"><img class="btn-img" src="/images/kakao_login_medium_narrow.png"></a>
@@ -181,7 +181,7 @@
 					    </script> -->
 					    <!-- 네이버 -->
 					   
-					     <%-- <%
+					       <%-- <%
 						    String clientId = "FzMGbETEgw2xNeSUlIIF";//애플리케이션 클라이언트 아이디값";
 						    String redirectURI = URLEncoder.encode("http://192.168.0.159:8080/user/naverLogin", "UTF-8");
 						    SecureRandom random = new SecureRandom();
@@ -192,14 +192,12 @@
 						         + "&state=" + state;
 						    session.setAttribute("state", state);
 						 %>
-						   <a href="<%=apiURL%>"><img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>   --%>
-						   <a href="https://nid.naver.com/oauth2.0/authorize?client_id=FzMGbETEgw2xNeSUlIIF&response_type=code&redirect_uri=http://192.168.0.159:8080/user/naverLogin&state=url_parameter">
-							  <img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/>
-							</a>
-						   <!-- <a href="https://nid.naver.com/oauth2.0/authorize?client_id={FzMGbETEgw2xNeSUlIIF}&response_type=code&redirect_uri={http://192.168.0.159:8080/user/naverLogin(utf-8)}&state={state}">
-						   <img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a> --> 
+						   <a href="<%=apiURL%>"><img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>  -  --%> 
 						   
-					    
+						  <!--  <a href="https://nid.naver.com/oauth2.0/authorize?client_id=FzMGbETEgw2xNeSUlIIF&response_type=code&redirect_uri=http://192.168.0.159:8080/user/naverLogin&state=url_parameter"> -->
+						  <!-- <a href="https://nid.naver.com/oauth2.0/authorize?client_id=FzMGbETEgw2xNeSUlIIF&response_type=code&redirect_uri=http://192.168.0.159:8080/user/naverLogin&state=test"> -->
+						  <a href="https://nid.naver.com/oauth2.0/authorize?client_id=FzMGbETEgw2xNeSUlIIF&response_type=code&redirect_uri=http://192.168.0.159:8080/user/naverLogin&state=test">
+							  <img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/>	</a>
 					    
 					    </div>
 					  </div>

@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8"%>
 
 <html>
 <head>
@@ -10,9 +10,9 @@
 </head>
 <body>
 	당신이 열어본 상품을 알고 있다
-<br>
-<br>
-<%
+	<br>
+	<br>
+	<%
 	request.setCharacterEncoding("UTF-8");
 	response.setCharacterEncoding("UTF-8");
 	String history = null;
@@ -29,10 +29,10 @@
 			for (int i = 0; i < h.length; i++) {
 				if (!h[i].equals("null")) {
 %>
-<a href="/product/getProduct?prodNo=<%=h[i]%>&menu=search"
-	target="rightFrame"><%=h[i]%></a>
-<br>
-<%
+	<a href="/product/getProduct?prodNo=<%=h[i]%>&menu=search"
+		target="rightFrame"><%=h[i]%></a>
+	<br>
+	<%
 				}
 			}
 		}
