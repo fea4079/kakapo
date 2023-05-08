@@ -29,7 +29,7 @@ public class NaverService {
 	private NaverDao naverDao;
 	
 	 
-	public String getAccessToken(String authorize_code) { //stat�κ� �߰�
+	public String getAccessToken(String authorize_code) throws IOException{ //stat�κ� �߰�
 		
 		String access_Token = "";
 		String refresh_Token = "";
@@ -51,10 +51,10 @@ public class NaverService {
 			StringBuilder sb = new StringBuilder();
 			sb.append("grant_type=authorization_code");
 			sb.append("&client_id=FzMGbETEgw2xNeSUlIIF"); //������ �߱޹��� key
-			sb.append("&client_secret=voluTpxuLM"); // ������ �߱޹��� secret                                         ���̹��� �߰���
 			sb.append("&redirect_uri=http://192.168.0.159:8080/user/naverLogin"); // ������ ������ �ּ�
 			sb.append("&code=" + authorize_code);
-			sb.append("&state=test"); //���� �ٽ� �߰�
+			sb.append("&client_secret=voluTpxuLM"); // ������ �߱޹��� secret                                         ���̹��� �߰���
+//			sb.append("&state=test"); //���� �ٽ� �߰�
 			bw.write(sb.toString());
 			bw.flush();
 			System.out.println("여기까지 실행됨33");
@@ -76,8 +76,9 @@ public class NaverService {
 			ObjectMapper objectMapper = new ObjectMapper();
 			// JSON String -> Map
 			System.out.println("여기까지 실행됨55");
-			Map<String, Object> jsonMap = objectMapper.readValue(result, new TypeReference<Map<String, Object>>() {
-			});
+			Map<String, Object> jsonMap = objectMapper.readValue(result, Map.class);
+//			Map<String, Object> jsonMap = objectMapper.readValue(result, new TypeReference<Map<String, Object>>() {
+//			});
 				
 			access_Token = jsonMap.get("access_token").toString();
 			refresh_Token = jsonMap.get("refresh_token").toString();
@@ -100,100 +101,68 @@ public class NaverService {
 	
 	
 	
-	public HashMap<String, Object> getUserInfo(String access_Token) throws Exception {
+	public Map<String, Object> getUserInfo(String access_Token) throws Exception {
 
-		// ��û�ϴ� Ŭ���̾�Ʈ���� ���� ������ �ٸ� �� �ֱ⿡ HashMapŸ������ ����
-		HashMap<String, Object> userInfo = new HashMap<String, Object>();
-		String reqURL = "https://openapi.naver.com/v1/nid/me";
+		Map<String, Object> userInfo = new HashMap<>();
+		String postURL = "https://openapi.naver.com/v1/nid/me";
+		
 		try {
-			URL url = new URL(reqURL);
+			URL url = new URL(postURL);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-			conn.setRequestMethod("GET");
-
-			// ��û�� �ʿ��� Header�� ���Ե� ����
-			conn.setRequestProperty("Authorization", "Bearer " + access_Token);
-			System.out.println("NaverService getUserInfo "+access_Token);
+			conn.setRequestMethod("POST");
 			
+			conn.setRequestProperty("Authorization", "Bearer " + access_Token);
 			
 			int responseCode = conn.getResponseCode();
-			System.out.println("NaverService.java responseCode : " + responseCode);
-
+			System.out.println("responseCode : " + responseCode);
+			
 			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-
 			String line = "";
-			String result = "";
+	        String result ="";
 
-			while ((line = br.readLine()) != null) {
+	        while ((line = br.readLine()) != null) {
 				result += line;
 			}
-			System.out.println("NaverService.java response body : " + result);
-			System.out.println("여기까지 실행됨77");
-			ObjectMapper mapper = new ObjectMapper();
-			
-			//JSONParser parser = new JSONParser(result);
-//			JSONObject element = (JSONObject) JSONValue.parse(result);
-			JSONObject responseObject = (JSONObject) JSONValue.parse(result);
-			JSONObject element = (JSONObject) responseObject.get("response");
-			System.out.println("여기까지 실행됨88");
-//			String userId = mapper.readValue(element.get("id").toString(), String.class);
-			
-			Object idObject = element.get("id");
-			if (idObject != null) {
-			    String userId = mapper.readValue(idObject.toString(), String.class);
-			    // Rest of the code that uses userId
-			} else {
-			    System.out.println("Error: idObject is null.");
-			}
-			
-			String userId = null;
-			if (idObject != null) {
-			    userId = mapper.readValue(idObject.toString(), String.class);
-			} else {
-			    System.out.println("Error: idObject is null.");
-			}
-			
-			
-			System.out.println("여기까지 실행됨99");
-			if(userId != null) {
-			System.out.println("id값 넘어옴 아이디값은 : "+userId);
-			}else {
-				System.out.println("id값 안넘어옴 널임!!!");
-			}
-			System.out.println("여기까지 실행됨10");
-			//JSONObject id = mapper.convertValue(element.get("id"), JSONObject.class);
-			JSONObject properties = mapper.convertValue(element.get("properties"), JSONObject.class);
-			System.out.println("NaverService.java properties ����ȯ : "+properties);
-			JSONObject naver_account = mapper.convertValue(element.get("naver_account"), JSONObject.class);
-			//JSONObject properties =(JSONObject) element.get("properties");
-			//JSONObject kakao_account = (JSONObject) element.get("kakao_account");
-			//String userId = mapper.convertValue(id.toString(), String.class);
-			String nickname = mapper.convertValue(properties.get("nickname"), String.class);
-			String email = mapper.convertValue(naver_account.get("email"), String.class);
-			//String nickname = (String) element.get("nickname");
-			//String email = (String) element.get("email");
+	        System.out.println("response body : " + result);
 
-			userInfo.put("nickname", nickname);
-			userInfo.put("email", email);
-			userInfo.put("id", userId);
-			System.out.println("NaverService.java#####�г���"+userInfo.get("nickname"));
-			System.out.println("NaverService.java#####�̸���"+userInfo.get("email"));
-			
-			NaverService ns = new NaverService(); 
-			
-			
-			
-			if(naverDao.checkDuplication(userId)==false) {
-				User user = new User();
-				user.setUserId(userId);
-				user.setPassword(userId);
-				user.setUserName(nickname);
-				user.setEmail(email);
-				naverDao.addUser(user);
-			}
-				
-			
-		} catch (IOException e) {
-			e.printStackTrace();
+	        // [방법 1 : String 사용]
+//	        String data = "{\"id}
+	        
+	        ObjectMapper objectMapper = new ObjectMapper();
+	        Map<String, Object> elvis_presley = objectMapper.readValue(result, Map.class);
+	        
+	        System.out.println("5678"+elvis_presley+"5678");
+	        
+	        
+	        Map<String, Object> properties = (Map<String, Object>) elvis_presley.get("response");
+	        
+	        String nickname = properties.get("name").toString();
+	        String id = properties.get("id").toString().substring(0,10);
+            String email = properties.get("email").toString();
+	        String name = properties.get("name").toString();
+            
+	        userInfo.put("name", nickname);
+	        userInfo.put("id", id);
+	        userInfo.put("email", email);
+	        
+	        System.out.println("닉네임 : "+nickname);
+	        System.out.println("이메일 : "+email);
+	        System.out.println("아이디 : "+id);
+	        System.out.println(userInfo);
+	        
+	    if(naverDao.checkDuplication(id) == false) {
+	    
+	    	User user = new User();
+	    	user.setUserId(id);
+	    	user.setEmail(email);
+	    	user.setPassword(id);
+	    	user.setUserName(name);
+	    	naverDao.addUser(user);
+	    	System.out.println("호날두"+user+"메시");
+	    }
+	        
+		}catch (IOException exception) {
+			exception.printStackTrace();
 		}
 		return userInfo;
 	}

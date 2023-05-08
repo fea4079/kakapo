@@ -211,7 +211,7 @@ public class UserController {
 		String access_Token = ns.getAccessToken(code);
 		System.out.println("UserController.java naver#2222#access_Token#### : " + access_Token);
 		
-		HashMap<String, Object> userInfo = ns.getUserInfo(access_Token);
+		Map<String, Object> userInfo = ns.getUserInfo(access_Token);
 		System.out.println("UserController.java naver#3333#access_Token#### : " + access_Token);
 		System.out.println("UserController.java naver#4444#nickname#### : " + userInfo.get("nickname"));
 		System.out.println("UserController.java naver#5555#email#### : " + userInfo.get("email"));
